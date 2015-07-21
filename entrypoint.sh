@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 
-exec gosu root "$@"
+exec "$@"
