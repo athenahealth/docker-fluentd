@@ -1,4 +1,5 @@
-FROM ruby:2.2.2
+#FROM ruby:2.2.2
+FROM cloudgear/ruby:2.2-minimal
 
 WORKDIR /root
 ADD Gemfile /root/Gemfile
@@ -6,6 +7,7 @@ ADD Gemfile.lock /root/Gemfile.lock
 
 RUN apt-get update \
     && apt-get install -y \
+        git \
         libcurl4-openssl-dev \
         libjemalloc-dev \
     && echo "gem: --no-document --no-ri --no-rdoc\n" >> ~/.gemrc \
