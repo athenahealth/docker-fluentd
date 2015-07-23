@@ -1,5 +1,5 @@
-#FROM ruby:2.2.2
-FROM cloudgear/ruby:2.2-minimal
+FROM ruby:2.2.2-slim
+#FROM cloudgear/ruby:2.2-minimal
 
 WORKDIR /root
 ADD Gemfile /root/Gemfile
@@ -10,6 +10,7 @@ RUN apt-get update \
         git \
         libcurl4-openssl-dev \
         libjemalloc-dev \
+        libgeoip-dev \
     && echo "gem: --no-document --no-ri --no-rdoc\n" >> ~/.gemrc \
     && apt-get clean \
     && apt-get autoremove -y \
