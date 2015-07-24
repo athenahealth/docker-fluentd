@@ -20,6 +20,7 @@ RUN yum -y --color=never clean all \
          gcc \
          make \
          patch \
+         file \
          libicu-devel \
          zlib-devel \
          libxml2 \
@@ -41,6 +42,7 @@ RUN yum -y --color=never clean all \
     && yum -y --color=never autoremove \
          gcc \
          patch \
+         file \
          libicu-devel \
          zlib-devel \
          libxml2-devel \
