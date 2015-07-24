@@ -29,6 +29,8 @@ RUN yum -y --color=never clean all \
          libxslt \
          libxslt-devel \
          git \
+         tar \
+         bzip2 \
          jemalloc \
          jemalloc-devel \
          GeoIP \
@@ -50,6 +52,8 @@ RUN yum -y --color=never clean all \
          libxml2-devel \
          libxslt-devel \
          git \
+         tar \
+         bzip2 \
          jemalloc-devel \
          GeoIP-devel \
     && yum -y --color=never clean all
