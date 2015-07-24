@@ -23,6 +23,7 @@ RUN yum -y --color=never clean all \
          file \
          libicu-devel \
          zlib-devel \
+         libyaml-devel \
          libxml2 \
          libxml2-devel \
          libxslt \
@@ -44,6 +45,7 @@ RUN yum -y --color=never clean all \
          patch \
          file \
          libicu-devel \
+         libyaml-devel \
          zlib-devel \
          libxml2-devel \
          libxslt-devel \
