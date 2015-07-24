@@ -1,25 +1,56 @@
-FROM ruby:2.2.2-slim
-#FROM cloudgear/ruby:2.2-minimal
+FROM quay.io/athenahealth/ruby:2.1.6
+
+# install things globally, for great justice
+ENV GEM_HOME /usr/local/bundle
+ENV PATH /root/bin:$GEM_HOME/bin:$PATH
+
+ENV BUNDLER_VERSION 1.10.6
+# don't create ".bundle" in all our apps
+ENV BUNDLE_APP_CONFIG $GEM_HOME
 
 WORKDIR /root
 ADD Gemfile /root/Gemfile
 ADD Gemfile.lock /root/Gemfile.lock
 
-RUN apt-get update \
-    && apt-get install -y \
-        git \
-        libcurl4-openssl-dev \
-        libjemalloc-dev \
-        libgeoip-dev \
-    && echo "gem: --no-document --no-ri --no-rdoc\n" >> ~/.gemrc \
-    && apt-get clean \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN yum -y --color=never install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+    && yum -y --color=never clean all
+    
+RUN yum -y --color=never clean all \
+    && yum -y --color=never --enablerepo ol7_optional_latest install \
+         gcc \
+         make \
+         patch \
+         libicu-devel \
+         zlib-devel \
+         libxml2 \
+         libxml2-devel \
+         libxslt \
+         libxslt-devel \
+         git \
+         jemalloc \
+         jemalloc-devel \
+         GeoIP \
+         GeoIP-devel \
+    && gem install bundler --version "$BUNDLER_VERSION" \
+    && bundle config --global path "$GEM_HOME" \
+    && bundle config --global bin "$GEM_HOME/bin" \
+    && bundle config build.nokogiri --use-system-libraries \
+    && bundle install --jobs 2 --system --binstubs --clean \
+    && find $GEM_HOME -type f | xargs file | grep 'not stripped' | awk '{ print $1 }' | cut -d: -f1 | xargs strip -g -S -d --strip-debug \
+    && fluentd --setup /etc/fluent \
+    && yum -y --color=never autoremove \
+         gcc \
+         patch \
+         libicu-devel \
+         zlib-devel \
+         libxml2-devel \
+         libxslt-devel \
+         git \
+         jemalloc-devel \
+         GeoIP-devel \
+    && yum -y --color=never clean all
 
-RUN bundle install --jobs 2 --system --binstubs --clean \
-    && fluentd --setup /etc/fluent
-
-ENV LD_PRELOAD /usr/lib/x86_64-linux-gnu/libjemalloc.so
+ENV LD_PRELOAD /usr/lib64/libjemalloc.so.1
 
 VOLUME /etc/fluent
 VOLUME /log
