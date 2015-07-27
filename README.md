@@ -8,3 +8,5 @@ log destination on the host):
 ```
 docker run -it -v /etc/fluent:/etc/fluent -v /var/log:/log athenahealth/fluentd:latest
 ```
+
+[![Docker Repository on Quay.io](https://quay.io/repository/athenahealth/fluentd/status "Docker Repository on Quay.io")](https://quay.io/repository/athenahealth/fluentd)
