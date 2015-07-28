@@ -18,6 +18,7 @@ RUN yum -y --color=never install https://dl.fedoraproject.org/pub/epel/epel-rele
 RUN yum -y --color=never clean all \
     && yum -y --color=never --enablerepo ol7_optional_latest install \
          gcc \
+         gcc-c++ \
          make \
          patch \
          file \
@@ -44,6 +45,7 @@ RUN yum -y --color=never clean all \
     && fluentd --setup /etc/fluent \
     && yum -y --color=never autoremove \
          gcc \
+         gcc-c++ \
          patch \
          file \
          libicu-devel \
