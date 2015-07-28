@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/athenahealth/fluent-plugin-graphite.git
+  revision: f1a4f640ffc4218c3b848f304d0b7a41736d2a46
+  branch: fix_fluentd_0.12_compat
+  specs:
+    fluent-plugin-graphite (0.0.5)
+      fluent-mixin-rewrite-tag-name
+      fluentd (>= 0.10.17)
+      graphite-api
+
+GIT
   remote: https://github.com/athenahealth/fluent-plugin-newsyslog.git
   revision: 905960ab07f3103415df8bd41e09dd5741a9221a
   tag: v0.1.0
@@ -21,6 +31,7 @@ GEM
     elasticsearch-transport (1.0.12)
       faraday
       multi_json
+    eventmachine (1.0.7)
     excon (0.45.4)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
@@ -87,6 +98,9 @@ GEM
       tzinfo-data (>= 1.0.0)
       yajl-ruby (~> 1.0)
     geoip-c (0.9.1)
+    graphite-api (0.1.6)
+      eventmachine (>= 0.3.3)
+      zscheduler (>= 0.0.3)
     http_parser.rb (0.6.0)
     json (1.8.3)
     ltsv (0.1.0)
@@ -109,6 +123,8 @@ GEM
     webhdfs (0.6.0)
     yajl-ruby (1.2.1)
     zookeeper (1.4.10)
+    zscheduler (0.0.6)
+      eventmachine
 
 PLATFORMS
   ruby
@@ -119,6 +135,7 @@ DEPENDENCIES
   fluent-plugin-flowcounter-simple (= 0.0.4)
   fluent-plugin-forest (= 0.3.0)
   fluent-plugin-geoip (= 0.5.0)
+  fluent-plugin-graphite!
   fluent-plugin-kafka (= 0.0.15)
   fluent-plugin-newsyslog!
   fluent-plugin-ping-message (= 0.1.2)
