@@ -16,4 +16,4 @@ gem 'fluent-plugin-geoip', '0.5.0'
 # plugins for monitoring fluentd stats
 gem 'fluent-plugin-flowcounter', '0.3.0'
 gem 'fluent-plugin-flowcounter-simple', '0.0.4'
-gem 'fluent-plugin-graphite', :git => 'https://github.com/athenahealth/fluent-plugin-graphite.git', :branch => 'fix_fluentd_0.12_compat'
+gem 'fluent-plugin-graphite', '0.0.6'
