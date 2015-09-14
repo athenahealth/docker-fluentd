@@ -14,7 +14,7 @@ ADD Gemfile.lock /root/Gemfile.lock
 
 RUN yum -y --color=never install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
     && yum -y --color=never clean all
-    
+
 RUN yum -y --color=never clean all \
     && yum -y --color=never --enablerepo ol7_optional_latest install \
          gcc \
@@ -64,8 +64,6 @@ ENV LD_PRELOAD /usr/lib64/libjemalloc.so.1
 
 VOLUME /etc/fluent
 VOLUME /log
-
-EXPOSE 514 1463 24220 24224
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
