@@ -65,6 +65,7 @@ GEM
     fluent-plugin-record-modifier (0.3.0)
       fluent-mixin-config-placeholders (>= 0.3.0)
       fluentd (>= 0.10.58, < 2)
+    fluent-plugin-retag (0.0.1)
     fluent-plugin-rewrite-tag-filter (1.5.1)
       fluentd
       string-scrub (= 0.0.3)
@@ -135,6 +136,7 @@ DEPENDENCIES
   fluent-plugin-newsyslog!
   fluent-plugin-ping-message (= 0.1.2)
   fluent-plugin-record-modifier (= 0.3.0)
+  fluent-plugin-retag (= 0.0.1)
   fluent-plugin-rewrite-tag-filter (= 1.5.1)
   fluent-plugin-s3 (= 0.5.9)
   fluent-plugin-scribe (= 0.10.14)

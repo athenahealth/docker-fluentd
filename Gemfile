@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'fluentd', '0.12.14'
+gem 'fluent-plugin-retag', '0.0.1'
 gem 'fluent-plugin-forest', '0.3.0'
 gem 'fluent-plugin-record-modifier', '0.3.0'
 gem 'fluent-plugin-rewrite-tag-filter', '1.5.1'
