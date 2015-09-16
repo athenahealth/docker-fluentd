@@ -36,6 +36,8 @@ RUN yum -y --color=never clean all \
          jemalloc-devel \
          GeoIP \
          GeoIP-devel \
+         snappy \
+         snappy-devel \
     && gem install bundler --version "$BUNDLER_VERSION" \
     && bundle config --global path "$GEM_HOME" \
     && bundle config --global bin "$GEM_HOME/bin" \
@@ -58,6 +60,7 @@ RUN yum -y --color=never clean all \
          bzip2 \
          jemalloc-devel \
          GeoIP-devel \
+         snappy-devel \
     && yum -y --color=never clean all
 
 ENV LD_PRELOAD /usr/lib64/libjemalloc.so.1
