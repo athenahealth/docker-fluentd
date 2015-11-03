@@ -1,10 +1,9 @@
-FROM quay.io/athenahealth/ruby:2.1.6
+FROM quay.io/athenahealth/ruby:2.2.2
 
 # install things globally, for great justice
 ENV GEM_HOME /usr/local/bundle
 ENV PATH /root/bin:$GEM_HOME/bin:$PATH
 
-ENV BUNDLER_VERSION 1.10.6
 # don't create ".bundle" in all our apps
 ENV BUNDLE_APP_CONFIG $GEM_HOME
 
@@ -12,8 +11,8 @@ WORKDIR /root
 ADD Gemfile /root/Gemfile
 ADD Gemfile.lock /root/Gemfile.lock
 
-RUN yum -y --color=never install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-    && yum -y --color=never clean all
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+    && yum -y clean all
 
 RUN yum -y --color=never clean all \
     && yum -y --color=never --enablerepo ol7_optional_latest install \
@@ -38,7 +37,9 @@ RUN yum -y --color=never clean all \
          GeoIP-devel \
          snappy \
          snappy-devel \
-    && gem install bundler --version "$BUNDLER_VERSION" \
+         rh-ruby22-ruby-devel \
+         rh-ruby22-rubygems-devel \
+    && source /opt/rh/rh-ruby22/enable \
     && bundle config --global path "$GEM_HOME" \
     && bundle config --global bin "$GEM_HOME/bin" \
     && bundle config build.nokogiri --use-system-libraries \
@@ -61,6 +62,8 @@ RUN yum -y --color=never clean all \
          jemalloc-devel \
          GeoIP-devel \
          snappy-devel \
+         rh-ruby22-ruby-devel \
+         rh-ruby22-rubygems-devel \
     && yum -y --color=never clean all
 
 ENV LD_PRELOAD /usr/lib64/libjemalloc.so.1
