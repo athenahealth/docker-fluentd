@@ -33,6 +33,10 @@ GEM
       ltsv
     fluent-mixin-rewrite-tag-name (0.1.0)
       fluentd
+    fluent-plugin-buffer-event_limited (0.1.0)
+      fluentd (>= 0.10.42)
+    fluent-plugin-cat-sweep (0.1.1)
+      fluentd
     fluent-plugin-elasticsearch (1.1.0)
       elasticsearch
       excon
@@ -133,6 +137,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  fluent-plugin-buffer-event_limited (= 0.1.0)
+  fluent-plugin-cat-sweep (= 0.1.1)
   fluent-plugin-elasticsearch (= 1.1.0)
   fluent-plugin-flatten-hash (= 0.2.0)
   fluent-plugin-flowcounter (= 0.3.0)
