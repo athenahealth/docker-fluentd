@@ -12,7 +12,7 @@ gem 'snappy', '0.0.12'
 gem 'fluent-plugin-kafka', '0.0.15'
 gem 'fluent-plugin-scribe', '0.10.14'
 gem 'fluent-plugin-webhdfs', '0.4.1'
-gem 'fluent-plugin-elasticsearch', '1.0.0'
+gem 'fluent-plugin-elasticsearch', '1.1.0'
 gem 'fluent-plugin-newsyslog', :git => 'https://github.com/athenahealth/fluent-plugin-newsyslog.git', :tag => 'v0.1.0'
 gem 'fluent-plugin-geoip', '0.5.0'
 # plugins for monitoring fluentd stats
