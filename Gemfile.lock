@@ -83,6 +83,7 @@ GEM
     fluent-plugin-scribe (0.10.14)
       fluentd
       thrift (~> 0.8.0)
+    fluent-plugin-string-scrub (0.1.0)
     fluent-plugin-webhdfs (0.4.1)
       fluent-mixin-config-placeholders (>= 0.3.0)
       fluent-mixin-plaintextformatter (>= 0.2.1)
@@ -154,6 +155,7 @@ DEPENDENCIES
   fluent-plugin-rewrite-tag-filter (= 1.5.1)
   fluent-plugin-s3 (= 0.5.9)
   fluent-plugin-scribe (= 0.10.14)
+  fluent-plugin-string-scrub (= 0.1.0)
   fluent-plugin-webhdfs (= 0.4.1)
   fluentd (= 0.12.15)
   snappy (= 0.0.12)
