@@ -18,6 +18,8 @@ gem 'fluent-plugin-webhdfs', '0.4.1'
 gem 'fluent-plugin-elasticsearch', '1.1.0'
 gem 'fluent-plugin-newsyslog', :git => 'https://github.com/athenahealth/fluent-plugin-newsyslog.git', :tag => 'v0.1.0'
 gem 'fluent-plugin-geoip', '0.5.0'
+gem 'fluent-plugin-anonymizer', '0.3.0'
+gem 'fluent-plugin-esslowquery', '1.0.0'
 # plugins for monitoring fluentd stats
 gem 'fluent-plugin-flowcounter', '0.3.0'
 gem 'fluent-plugin-flowcounter-simple', '0.0.4'
