@@ -1,78 +1,36 @@
-FROM quay.io/athenahealth/ruby:2.2.2
+FROM fluent/fluentd:v0.12.28-onbuild
 
-# install things globally, for great justice
-ENV GEM_HOME /usr/local/bundle
-ENV PATH /root/bin:$GEM_HOME/bin:$PATH
+MAINTAINER your_name <...>
 
-# don't create ".bundle" in all our apps
-ENV BUNDLE_APP_CONFIG $GEM_HOME
+USER fluent
 
-WORKDIR /root
-ADD Gemfile /root/Gemfile
-ADD Gemfile.lock /root/Gemfile.lock
+WORKDIR /home/fluent
 
-RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-    && yum -y clean all
+ENV PATH /home/fluent/.gem/ruby/2.3.0/bin:$PATH
 
-RUN yum -y --color=never clean all \
-    && yum -y --color=never --enablerepo ol7_optional_latest install \
-         gcc \
-         gcc-c++ \
-         make \
-         patch \
-         file \
-         libicu-devel \
-         zlib-devel \
-         libyaml-devel \
-         libxml2 \
-         libxml2-devel \
-         libxslt \
-         libxslt-devel \
-         git \
-         tar \
-         bzip2 \
-         jemalloc \
-         jemalloc-devel \
-         GeoIP \
-         GeoIP-devel \
-         snappy \
-         snappy-devel \
-         rh-ruby22-ruby-devel \
-         rh-ruby22-rubygems-devel \
-    && source /opt/rh/rh-ruby22/enable \
-    && bundle config --global path "$GEM_HOME" \
-    && bundle config --global bin "$GEM_HOME/bin" \
-    && bundle config build.nokogiri --use-system-libraries \
-    && bundle install --jobs 2 --system --binstubs --clean \
-    && find $GEM_HOME -type f | xargs file | grep 'not stripped' | awk '{ print $1 }' | cut -d: -f1 | xargs strip -g -S -d --strip-debug \
-    && fluentd --setup /etc/fluent \
-    && yum -y --color=never autoremove \
-         gcc \
-         gcc-c++ \
-         patch \
-         file \
-         libicu-devel \
-         libyaml-devel \
-         zlib-devel \
-         libxml2-devel \
-         libxslt-devel \
-         git \
-         tar \
-         bzip2 \
-         jemalloc-devel \
-         GeoIP-devel \
-         snappy-devel \
-         rh-ruby22-ruby-devel \
-         rh-ruby22-rubygems-devel \
-    && yum -y --color=never clean all
+# Do not split this into multiple RUN!
+# Docker creates a layer for every RUN-Statement
+# therefore an 'apk delete build*' has no effect
+RUN apk --no-cache --update add \
+                            build-base \
+                            geoip \
+                            ruby-dev && \
+    gem install oj -v 2.17.1 && \
+    gem install snappy -v 0.0.15 && \
+    gem install string-scrub -v 0.0.5 && \
+    gem install fluent-plugin-forest -v 0.3.0 && \
+    gem install fluent-plugin-flatten-hash -v 0.4.0 && \
+    gem install fluent-plugin-record-modifier -v 0.4.1 && \
+    gem install fluent-plugin-kafka -v 0.3.0.rc1 && \
+    gem install fluent-plugin-elasticsearch -v 1.5.0 && \
+    gem install fluent-plugin-geoip -v 0.6.1 && \
+    gem install fluent-plugin-flowcounter -v 0.4.1 && \
+    gem install fluent-plugin-flowcounter-simple -v 0.0.4 && \
+    gem install fluent-plugin-graphite -v 0.0.6 && \
+    gem install fluent-plugin-multiprocess -v 0.2.0 && \
+    apk del build-base ruby-dev && \
+    rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
-ENV LD_PRELOAD /usr/lib64/libjemalloc.so.1
+EXPOSE 24284
 
-VOLUME /etc/fluent
-VOLUME /log
-
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
-CMD ["fluentd", "-c", "/etc/fluent/fluent.conf"]
+CMD fluentd -c /fluentd/etc/$FLUENTD_CONF -p /fluentd/plugins $FLUENTD_OPT
