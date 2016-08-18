@@ -20,7 +20,7 @@ RUN apk --no-cache --update add \
                             snappy-dev \
                             ruby-dev && \
     gem install snappy && \
-    gem install string-scrub -v 0.0.5 && \
+    gem install fluent-plugin-string-scrub -v 0.1.0 && \
     gem install fluent-plugin-forest -v 0.3.0 && \
     gem install fluent-plugin-flatten-hash -v 0.4.0 && \
     gem install fluent-plugin-record-modifier -v 0.4.1 && \
