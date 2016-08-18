@@ -6,6 +6,7 @@ WORKDIR /home/fluent
 
 ENV PATH /home/fluent/.gem/ruby/2.3.0/bin:$PATH
 
+# Run as root for backwards compatibility
 USER root
 
 # Do not split this into multiple RUN!
@@ -33,9 +34,6 @@ RUN apk --no-cache --update add \
     apk del build-base ruby-dev geoip-dev snappy-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* && \
     chown -R fluent:fluent /fluentd
-
-
-USER fluent
 
 EXPOSE 24220 24224
 
