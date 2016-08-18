@@ -1,8 +1,6 @@
 FROM fluent/fluentd:v0.12.28-onbuild
 
-MAINTAINER your_name <...>
-
-USER fluent
+MAINTAINER Stas Alekseev <salekseev@athenahealth.com>
 
 WORKDIR /home/fluent
 
@@ -31,6 +29,8 @@ RUN apk --no-cache --update add \
     apk del build-base ruby-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
-EXPOSE 24284
+USER fluent
+
+EXPOSE 24220 24224
 
 CMD fluentd -c /fluentd/etc/$FLUENTD_CONF -p /fluentd/plugins $FLUENTD_OPT
