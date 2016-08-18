@@ -32,7 +32,7 @@ RUN apk --no-cache --update add \
     gem install fluent-plugin-graphite -v 0.0.6 && \
     gem install fluent-plugin-multiprocess -v 0.2.0 && \
     apk del build-base ruby-dev geoip-dev snappy-dev && \
-    rm -rf /tmp/* /var/tmp/* /var/cache/apk/* && \
+    rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /usr/lib/ruby/gems/*/cache/*.gem && \
     chown -R fluent:fluent /fluentd
 
 EXPOSE 24220 24224
