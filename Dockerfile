@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v0.12.28
+FROM fluent/fluentd:v0.12.31
 
 MAINTAINER Stas Alekseev <salekseev@athenahealth.com>
 
@@ -20,11 +20,13 @@ RUN apk --no-cache --update add \
                             snappy-dev \
                             ruby-dev && \
     gem install snappy && \
+    gem install ruby-kafka -v 0.3.15 && \
+    gem install fluent-plugin-rewrite-tag-filter -v 1.5.5 && \
     gem install fluent-plugin-string-scrub -v 0.1.0 && \
     gem install fluent-plugin-forest -v 0.3.0 && \
     gem install fluent-plugin-flatten-hash -v 0.4.0 && \
     gem install fluent-plugin-record-modifier -v 0.4.1 && \
-    gem install fluent-plugin-kafka -v 0.3.0.rc1 && \
+    gem install fluent-plugin-kafka -v 0.4.1 && \
     gem install fluent-plugin-elasticsearch -v 1.5.0 && \
     gem install fluent-plugin-geoip -v 0.6.1 && \
     gem install fluent-plugin-flowcounter -v 0.4.1 && \
