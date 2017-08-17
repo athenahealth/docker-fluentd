@@ -18,5 +18,3 @@ RUN buildDeps="sudo make gcc g++ libc-dev ruby-dev libsystemd-dev" \
            /home/fluent/.gem/ruby/2.3.0/cache/*.gem
 
 EXPOSE 24231
-
-USER root
