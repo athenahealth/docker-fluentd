@@ -9,6 +9,7 @@ RUN buildDeps="sudo make gcc g++ libc-dev ruby-dev libsystemd-dev" \
         fluent-plugin-systemd:0.3.0 \
         fluent-plugin-prometheus:0.3.0 \
         fluent-plugin-kafka:0.6.0 \
+        fluent-plugin-gelf-hs:1.0.4 \
  && sudo gem sources --clear-all \
  && SUDO_FORCE_REMOVE=yes \
     apt-get purge -y --auto-remove \
