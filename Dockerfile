@@ -2,6 +2,11 @@ FROM fluent/fluentd:v0.14.20-debian-onbuild
 
 MAINTAINER Stas Alekseev <salekseev@athenahealth.com>
 
+ENV GELF_HOST     localhost
+ENV GELF_PORT     12201
+ENV GELF_PROTOCOL tcp
+ENV GELF_TLS      false
+
 RUN buildDeps="sudo make gcc g++ libc-dev ruby-dev libsystemd-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends libsystemd0 $buildDeps \
